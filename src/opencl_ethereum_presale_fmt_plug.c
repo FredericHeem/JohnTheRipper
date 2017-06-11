@@ -359,7 +359,7 @@ void *ethereum_presale_get_salt(char *ciphertext)
 	for (i = 0; p[i * 2] && i < AES_LEN; i++){
 		cs->aes_ct[i] = atoi16[ARCH_INDEX(p[i * 2])] * 16
 			+ atoi16[ARCH_INDEX(p[i * 2 + 1])];
-		printf("%d => %x\n", i, cs->aes_ct[i]);
+		//printf("%d => %x\n", i, cs->aes_ct[i]);
 	}
 	printf("cs->aes_len %d\n", i, cs->aes_len);
 	cs->aes_len = i;

@@ -1239,6 +1239,8 @@ AES_cbc_decrypt(AES_SRC_TYPE uchar *in, AES_DST_TYPE uchar *out,
                 uint len, const AES_KEY *key,
                 __private uchar ivec[16])
 {
+  printf("AES_cbc_decrypt %d, in[0] 0x%x, ivec 0x%x\n", len, in[0], ivec[0]);
+  uchar *outInit = out;
 	while (len) {
 		uint n;
 		union {
@@ -1251,7 +1253,9 @@ AES_cbc_decrypt(AES_SRC_TYPE uchar *in, AES_DST_TYPE uchar *out,
 			uchar c;
 
 			c = in[n];
+
 			out[n] = tmp.c[n] ^ ivec[n];
+      printf("out[%d] %x\n", n, out[n]);
 			ivec[n] = c;
 		}
 		if (len <= 16) {
@@ -1263,6 +1267,7 @@ AES_cbc_decrypt(AES_SRC_TYPE uchar *in, AES_DST_TYPE uchar *out,
 		in  += 16;
 		out += 16;
 	}
+  printf("AES_cbc_decrypt out[0] 0x%x\n", outInit[0]);
 }
 #endif
 
