@@ -354,7 +354,7 @@ int ethereum_presale_valid(char *ciphertext, struct fmt_main *self)
 {
 	char *ctcopy, *keeptr, *p;
 	int extra;
-
+	printf("ethereum_presale_valid %s\n", ciphertext);
 	if (strncmp(ciphertext, FORMAT_TAG, TAG_LENGTH) != 0)
 		return 0;
 
@@ -419,14 +419,13 @@ int ethereum_presale_valid(char *ciphertext, struct fmt_main *self)
 			goto err;
 		if ((p = strtokm(NULL, "*")) == NULL)   // bkp
 			goto err;
-		if (hexlenl(p, &extra) != 32 || extra)
-			goto err;
 	}
 
 	MEM_FREE(keeptr);
 	return 1;
 
 err:
+	printf("ethereum_presale_valid error %s\n", ciphertext);
 	MEM_FREE(keeptr);
 	return 0;
 }
@@ -516,7 +515,7 @@ struct fmt_main fmt_ethereum_presale = {
 		SALT_ALIGN,
 		MIN_KEYS_PER_CRYPT,
 		MAX_KEYS_PER_CRYPT,
-		FMT_CASE | FMT_8_BIT,
+		FMT_CASE | FMT_8_BIT | FMT_HUGE_INPUT,
 		{
 			"iteration count",
 		},
