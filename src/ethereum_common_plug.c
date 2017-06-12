@@ -94,8 +94,6 @@ int ethereum_common_valid(char *ciphertext, struct fmt_main *self)
 			goto err;
 		if ((p = strtokm(NULL, "*")) == NULL)   // bkp
 			goto err;
-		if (hexlenl(p, &extra) != 32 || extra)
-			goto err;
 	}
 
 	MEM_FREE(keeptr);
