@@ -465,9 +465,10 @@ __kernel void ethereum_presale_pbkdf2_sha256_kernel(__global const pass_t *inbuf
 
 	__global const uchar *pass = inbuffer[idx].v;
 	uint passlen = inbuffer[idx].length;
-
+/*
 	printf("ethereum_presale_pbkdf2_sha256_kernel = %s\n", pass);
 	printf("passlen = %d\n", passlen);
+  */
 	state[idx].rounds = 2000 - 1;
 
 	preproc(pass, passlen, ipad_state, 0x36363636);

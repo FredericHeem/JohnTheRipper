@@ -23,6 +23,8 @@ typedef struct {
 	int eslen;
 	uint8_t ethadd[128];
 	int ealen;
+	uint8_t bkp[128];
+	int bkplen;
 } custom_salt;
 
 extern struct fmt_tests ethereum_tests[];

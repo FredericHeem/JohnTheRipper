@@ -113,7 +113,7 @@ void *ethereum_common_get_salt(char *ciphertext)
 	int i;
 	char *p;
 	static custom_salt *cur_salt;
-
+printf("ethereum_common_get_salt %s\n", ciphertext);
 	cur_salt = mem_calloc_tiny(sizeof(custom_salt), MEM_ALIGN_WORD);
 
 	ctcopy += TAG_LENGTH;
@@ -137,10 +137,21 @@ void *ethereum_common_get_salt(char *ciphertext)
 		cur_salt->p = atoi(p);
 		p = strtokm(NULL, "*");
 	} else if (cur_salt->type == 2) {
+
 		cur_salt->eslen = strlen(p) / 2;
+    printf("ethereum_common_get_salt cur_salt->eslen %d\n", cur_salt->eslen);
 		for (i = 0; i < cur_salt->eslen; i++)
 			cur_salt->encseed[i] = atoi16[ARCH_INDEX(p[i * 2])] * 16
 				+ atoi16[ARCH_INDEX(p[i * 2 + 1])];
+
+    p = strtokm(NULL, "*");//Ethaddr
+    p = strtokm(NULL, "*");//Bkp
+    cur_salt->bkplen = strlen(p) / 2;
+    printf("ethereum_common_get_salt bkplen %d\n", cur_salt->bkplen);
+    for (i = 0; i < cur_salt->bkplen; i++)
+			cur_salt->bkp[i] = atoi16[ARCH_INDEX(p[i * 2])] * 16
+				+ atoi16[ARCH_INDEX(p[i * 2 + 1])];
+  printf("ethereum_common_get_salt cur_salt->bkp[i] %x\n", cur_salt->bkp[i]);
 	}
 	if (cur_salt->type == 0 || cur_salt->type == 1) {
 		cur_salt->saltlen = strlen(p) / 2;
