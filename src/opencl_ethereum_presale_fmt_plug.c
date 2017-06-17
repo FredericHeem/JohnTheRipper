@@ -12,6 +12,7 @@ extern struct fmt_main fmt_ethereum_presale;
 #elif FMT_REGISTERS_H
 john_register_one(&fmt_ethereum_presale);
 #else
+#include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 
