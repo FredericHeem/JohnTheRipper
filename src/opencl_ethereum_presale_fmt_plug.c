@@ -119,7 +119,7 @@ printf("create_clobj kpc %d\n", kpc);
 	                        "Cannot allocate mem in");
 	mem_salt = CLCREATEBUFFER(CL_RO, sizeof(custom_salt),
 	                          "Cannot allocate mem salt");
-	mem_out = CLCREATEBUFFER(CL_WO, kpc * sizeof(crack_t),
+	mem_out = CLCREATEBUFFER(CL_RW, kpc * sizeof(crack_t),
 	                         "Cannot allocate mem out");
 	mem_state = CLCREATEBUFFER(CL_RW, kpc * sizeof(state_t),
 	                           "Cannot allocate mem state");

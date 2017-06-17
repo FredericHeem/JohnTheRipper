@@ -6,6 +6,7 @@
  */
 
 #include "pbkdf2_hmac_sha256_kernel.cl"
+
 #define OCL_AES_CBC_DECRYPT 1
 #define AES_KEY_TYPE __global
 #define AES_SRC_TYPE __constant
@@ -38,7 +39,7 @@ typedef struct {
 } seed_t;
 
 __kernel void ethereum_presale_decrypt(__constant custom_salt *salt,
-                           __global crack_t *out,
+                           __constant crack_t *out,
                            __global seed_t *seed_out)
 {
 	uint32_t gid = get_global_id(0);
@@ -96,4 +97,6 @@ __kernel void ethereum_presale_decrypt(__constant custom_salt *salt,
   for(int i = 0; i < seed_length; i++){
 		seed_out[gid].data[i] = seed[i];
 	}
+
+
 }
